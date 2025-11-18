@@ -1,0 +1,39 @@
+import React from "react";
+import { KanbanContext } from "../../context/KanbanContext";
+import BoardColumn from "../BoardColumn/BoardColumn";
+import "./Board.css";
+
+export default function Board({ filterTerm }) {
+  const { tasks } = React.useContext(KanbanContext);
+
+  // Función para filtrar tareas
+  const filterTasks = (taskList) => {
+    return taskList.filter((task) => {
+      const text = filterTerm.toLowerCase();
+      return (
+        task.title.toLowerCase().includes(text) ||
+        (task.description && task.description.toLowerCase().includes(text))
+      );
+    });
+  };
+
+  return (
+    <div className="board">
+      <BoardColumn
+        title="To Do"
+        tasks={filterTasks(tasks.todo)}
+        columnKey="todo"
+      />
+      <BoardColumn
+        title="In Progress"
+        tasks={filterTasks(tasks.inProgress)}
+        columnKey="inProgress"
+      />
+      <BoardColumn
+        title="Done"
+        tasks={filterTasks(tasks.done)}
+        columnKey="done"
+      />
+    </div>
+  );
+}

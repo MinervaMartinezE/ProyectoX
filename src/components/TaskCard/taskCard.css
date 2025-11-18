@@ -1,0 +1,28 @@
+.task-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border: 2px solid transparent;
+}
+
+.task-card.todo {
+  border-color: #3b82f6; 
+}
+.task-card.inProgress {
+  border-color: #f59e0b; 
+}
+.task-card.done {
+  border-color: #10b981; 
+}
+
+.task-card select {
+  width: 100%;
+  margin-top: 10px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #dbd1d1;
+  color:#797676
+}
+
