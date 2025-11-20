@@ -1,7 +1,7 @@
 import React from "react";
 import { KanbanContext } from "../context/KanbanContext";
 
-//Formulario para añadir nuevas tares. Componente controlado
+// Controlled component used for adding new tasks
 export default function NewTaskForm() {
   const [title, setTitle] = React.useState("");
   const { addTask } = React.useContext(KanbanContext);
@@ -22,7 +22,7 @@ export default function NewTaskForm() {
         onChange={(e) => setTitle(e.target.value)}
         placeholder="New task title"
       />
-      <button type="submit">Add Task</button>
+      <button type="submit">Add task</button>
     </form>
   );
 }
