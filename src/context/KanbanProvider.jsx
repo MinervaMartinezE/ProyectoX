@@ -18,6 +18,7 @@ export function KanbanProvider({ children }) {
       id: Date.now(),
       title,
       description: "",
+      createdAt: new Date().toISOString(),
     };
     setTasks((prev) => ({
       ...prev,

@@ -1,10 +1,7 @@
-.board {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-  padding: 30px;
-  max-width: 1200px;
-  margin: auto;
-  background-color: rgb(241, 238, 238);
+.board{
+  display:flex;
+  padding: 40px;
+  overflow: hidden;
+  justify-content: center;
+  gap:50px;
 }
-

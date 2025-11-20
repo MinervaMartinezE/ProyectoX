@@ -1,8 +1,8 @@
 import React from "react";
 import { KanbanProvider } from "./context/KanbanProvider";
 import Board from "./components/Board/Board";
-import SearchFilter from "./components/SearchFilter";
-import NewTaskForm from "./components/NewTaskForm";
+import SearchFilter from "./components/SearchFilter/SearchFilter";
+import NewTaskForm from "./components/NewTaskForm/NewTaskForm";
 import "./App.css";
 
 export default function App() {

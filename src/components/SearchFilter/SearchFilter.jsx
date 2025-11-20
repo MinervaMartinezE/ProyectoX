@@ -1,4 +1,5 @@
 import React from "react";
+import "./searchFilter.css";
 
 // Uncontrolled component used for task filtering
 export default function SearchFilter({ onFilter }) {
@@ -10,9 +11,9 @@ export default function SearchFilter({ onFilter }) {
   };
 
   return (
-    <div>
-      <input type="text" ref={inputRef} placeholder="Search tasks..." />
-      <button onClick={handleFilter}>Filter</button>
+    <div className="search-filter-container">
+      <input type="text" ref={inputRef} placeholder="Search tasks..." className="search-filter-input"/>
+      <button onClick={handleFilter} className="filter-btn">Filter</button>
     </div>
   );
 }

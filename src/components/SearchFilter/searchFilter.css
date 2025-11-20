@@ -1,0 +1,32 @@
+.search-filter-input {
+  max-width: 300px;
+  padding: 8px 12px 8px 32px; 
+  border: 1px solid #f0f0f0;     
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  color: #333;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23999" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242 1.656a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: 8px center;
+  background-size: 16px 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-filter-input:focus {
+  border-color: #747678; 
+}
+
+.filter-btn {
+  border-radius: 6px;
+  background-color: #e6ecf1;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s;
+}
+
+.filter-btn:hover {
+  background-color: #e0e0e0;
+}
+
