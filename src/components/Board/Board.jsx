@@ -6,7 +6,7 @@ import "./Board.css";
 export default function Board({ filterTerm }) {
   const { tasks } = React.useContext(KanbanContext);
 
-  // Función para filtrar tareas
+  // Filters tasks based on the filter term
   const filterTasks = (taskList) => {
     return taskList.filter((task) => {
       const text = filterTerm.toLowerCase();

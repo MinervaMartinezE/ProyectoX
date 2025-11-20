@@ -2,83 +2,83 @@ import React from "react";
 import { KanbanContext } from "./KanbanContext";
 
 export function KanbanProvider({ children }) {
+  // Centralized task state grouped by column
   const [tasks, setTasks] = React.useState({
     todo: [],
     inProgress: [],
     done: [],
   });
 
-  // Añadir tareas
+  // Prevents the initialization logic from running twice 
+  const hasLoadedRef = React.useRef(false);
+
+  // Creates a new task and adds it to the "todo" column
   const addTask = (title) => {
     const newTask = {
       id: Date.now(),
       title,
       description: "",
     };
-    setTasks((prevTasks) => ({
-      ...prevTasks,
-      todo: [...prevTasks.todo, newTask],
+    setTasks((prev) => ({
+      ...prev,
+      todo: [...prev.todo, newTask],
     }));
   };
 
-  // Mover tareas
+  // Moves a task between columns while preserving all other tasks
   const moveTask = (taskId, newColumn) => {
-    setTasks((prevTasks) => {
-      let movedTask;
+    setTasks((prev) => {
+      let moved;
 
       const updated = Object.fromEntries(
-        Object.entries(prevTasks).map(([column, tasks]) => {
-          const remaining = tasks.filter((task) => {
-            if (task.id === taskId) movedTask = task;
-            return task.id !== taskId;
+        Object.entries(prev).map(([column, items]) => {
+          const remaining = items.filter((t) => {
+            if (t.id === taskId) moved = t;
+            return t.id !== taskId;
           });
           return [column, remaining];
         })
       );
 
-      if (movedTask) {
-        updated[newColumn] = [...updated[newColumn], movedTask];
-      }
+      if (moved) updated[newColumn] = [...updated[newColumn], moved];
       return updated;
     });
   };
 
-  // Cargar primero desde localStorage
+  // Initializes tasks from localStorage or falls back to remote data
   React.useEffect(() => {
-    const storedTasks = localStorage.getItem("kanbanTasks");
-    if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
-    }
-  }, []);
+    if (hasLoadedRef.current) return;
+    hasLoadedRef.current = true;
 
-  // Hacer fetch solo si no hay datos en localStorage
-  React.useEffect(() => {
-    const fetchTasks = async () => {
-      const storedTasks = localStorage.getItem("kanbanTasks");
-      if (storedTasks) return;
+    const loadTasks = async () => {
+      const stored = localStorage.getItem("kanbanTasks");
+      if (stored) {
+        setTasks(JSON.parse(stored));
+        return;
+      }
 
       try {
-        const response = await fetch("https://dummyjson.com/todos?limit=5");
-        const data = await response.json();
+        const res = await fetch("https://dummyjson.com/todos?limit=5");
+        const data = await res.json();
 
-        const initialTasks = { todo: [], inProgress: [], done: [] };
+        const initial = { todo: [], inProgress: [], done: [] };
         data.todos.forEach((item) => {
           const task = { id: item.id, title: item.todo, description: "" };
-          if (item.completed) initialTasks.done.push(task);
-          else initialTasks.todo.push(task);
+          item.completed ? initial.done.push(task) : initial.todo.push(task);
         });
 
-        setTasks(initialTasks);
+        setTasks(initial);
       } catch (err) {
-        console.error("Error al cargar datos de la API:", err);
+        console.error("Failed to load initial tasks:", err);
       }
     };
 
-    fetchTasks();
+    loadTasks();
   }, []);
 
-  //Guardar en localStorage cada vez que cambian las tareas
+  // Persists all task updates to localStorage
   React.useEffect(() => {
+    if (!hasLoadedRef.current) return;
     localStorage.setItem("kanbanTasks", JSON.stringify(tasks));
   }, [tasks]);
 

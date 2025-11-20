@@ -1,6 +1,6 @@
 import React from "react";
 
-//Función para buscar una tarea. Componente no controlado
+// Uncontrolled component used for task filtering
 export default function SearchFilter({ onFilter }) {
   const inputRef = React.useRef();
 

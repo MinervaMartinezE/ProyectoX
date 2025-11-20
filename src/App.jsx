@@ -1,9 +1,9 @@
 import React from "react";
-import { KanbanProvider } from "./components/KanbanProvider";
+import { KanbanProvider } from "./context/KanbanProvider";
 import Board from "./components/Board/Board";
 import SearchFilter from "./components/SearchFilter";
 import NewTaskForm from "./components/NewTaskForm";
-import './App.css';
+import "./App.css";
 
 export default function App() {
   const [filterTerm, setFilterTerm] = React.useState("");
