@@ -20,17 +20,17 @@ export default function Board({ filterTerm }) {
   return (
     <div className="board">
       <BoardColumn
-        title="To Do"
+        title="TO-DO"
         tasks={filterTasks(tasks.todo)}
         columnKey="todo"
       />
       <BoardColumn
-        title="In Progress"
+        title="IN-PROGRESS"
         tasks={filterTasks(tasks.inProgress)}
         columnKey="inProgress"
       />
       <BoardColumn
-        title="Done"
+        title="DONE"
         tasks={filterTasks(tasks.done)}
         columnKey="done"
       />

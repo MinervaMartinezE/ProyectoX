@@ -19,9 +19,9 @@ export default function TaskCard({ task, columnKey }) {
           <option value="" disabled className="placeholder">
             Move to...
           </option>
-          <option value="todo">To Do</option>
-          <option value="inProgress">In Progress</option>
-          <option value="done">Done</option>
+          <option value="todo">TO-DO</option>
+          <option value="inProgress">IN-PROGRESS</option>
+          <option value="done">DONE</option>
         </select>
       </div>
     </div>
